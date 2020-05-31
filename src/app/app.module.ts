@@ -14,14 +14,16 @@ import { HeaderComponent } from './header/header.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { BooksService } from './services/books.service';
-import { from } from 'rxjs';
+
 
 const appRoutes: Routes = [
 { path:'auth/signup', component: SignupComponent},
 { path: 'auth/signin', component: SigninComponent},
 { path: 'books', component: BookListComponent},
 { path: 'books/new', component: SingleFormComponent},
-{ path: 'books/view/:id', component: SingleBookComponent}
+{ path: 'books/view/:id', component: SingleBookComponent},
+{ path: '', redirectTo: 'books', pathMatch: 'full'},
+{ path: '**', redirectTo: 'books'}
 ]
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
+    
   ],
   providers: [
     AuthGuardService,
