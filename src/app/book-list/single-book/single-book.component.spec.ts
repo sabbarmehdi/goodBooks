@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SingleBookComponent } from './single-book.component';
 
-describe('SingleBookComponent', () => {
+describe('SingleFormComponent', () => {
   let component: SingleBookComponent;
   let fixture: ComponentFixture<SingleBookComponent>;
 

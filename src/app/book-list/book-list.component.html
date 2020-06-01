@@ -1,1 +1,35 @@
-<p>book-list works!</p>
+<div class="row">
+    <div class="col-xs-12">
+        <h2>Your Books</h2>
+            <div class="list-group">
+                <button class="list-group-item"
+                        *ngFor="let book of books; let i = index"
+                        (click)="onViewBook(i)" >
+                    <h3 class="list-group-item-heading"
+                        >{{ book.title }}
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </h3>
+                    <p class="list-group-item-text">{{ book.author }}</p>
+
+                </button>
+            </div>
+        <button class="btn btn-primary right" (click)="onNewBook()">New Book</button>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <h2>Your Books</h2>
+        <button class="btn btn-primary newBook" (click)="onNewBook()">New Book</button>
+        <div class="card" style="width: 18rem;">
+           <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+            <div class="card-body" *ngFor="let book of books; let i = index">
+              <h5 class="card-title">{{ book.title }}</h5>
+              <p class="card-text">{{ book.author }}</p>
+              <button class="btn btn-primary" (click)="onViewBook(i)">Read</button>
+            </div>
+          </div>
+    </div>
+</div>
+
