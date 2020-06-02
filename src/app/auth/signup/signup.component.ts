@@ -31,10 +31,10 @@ initForm(){
   }
 
 /**
- * Determines whether submit on
+ * submit on
  */
 onSubmit(){
-  //effectue les valeur recu par la signUpForm to email, password
+  //effectue les valeur recue par la signUpForm to email, password
   const email = this.signUpForm.get('email').value;
   const password = this.signUpForm.get('password').value;
   //Call la method createNewUser dans authService

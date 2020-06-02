@@ -26,5 +26,6 @@ export class AppComponent {
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 
+  
   }
 }

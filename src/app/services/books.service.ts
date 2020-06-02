@@ -1,14 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Book } from '../models/Book.model';
-import { Subject } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 import * as firebase from 'firebase';
 
-
-
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class BooksService {
 
   books: Book[] = [];
@@ -77,6 +72,18 @@ creatNewBook(newBook: Book){
  * @param book 
  */
 removeBook(book: Book){
+  if(book.photo){
+    const storageRef  = firebase.storage().refFromURL(book.photo);
+    storageRef.delete().then(
+      () => {
+        console.log('Picture Deleted !');
+      }
+    ).catch(
+      (error) => {
+        console.log('File not found : ' + error);
+      }
+    );
+  }
   //Find element by Id
   const bookIndexRemove = this.books.findIndex(
     (bookElment) => {
@@ -89,5 +96,31 @@ removeBook(book: Book){
   this.books.splice(bookIndexRemove, 1);
   this.savebooks();
   this.emitBooks();
+}
+/**
+ * Uploads file
+ * @param file 
+ * @returns  
+ */
+uploadFile(file: File){
+  return new Promise(
+    (resolve, reject) => {
+      const almostUniqueFileName = Date.now().toString();
+      const upload = firebase.storage().ref()
+        .child('images/' + almostUniqueFileName + file.name).put(file);
+        upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
+          ()=> {
+            console.log('Changement...');
+          },
+          (error) => {
+            console.log('Erreur de changement ! :' + error);
+            reject();
+          },
+          () => {
+            resolve(upload.snapshot.ref.getDownloadURL());
+          }
+          );
+    }
+  );
 }
 }
